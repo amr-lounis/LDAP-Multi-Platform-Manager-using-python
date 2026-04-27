@@ -83,7 +83,7 @@ class LDAPManager:
                 dn = e.distinguishedName.value
                 uname = e[uid].value if uid in e else dn
                 users.append(uname)
-                print(f"- {uname} -> : {dn}")
+                # print(f"- {uname} -> : {dn}")
             return users
         except Exception as e:
             print(f"Error: {e}")

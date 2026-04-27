@@ -35,12 +35,31 @@ ldap_params = {
     'server_type': 'ad'
 }
 
+
+_user='user1'
+
 with LDAPManager(**ldap_params) as ldap:
     # Get all users
-    users = ldap.users_get(base_dn="OU=Users,DC=domain,DC=com")
-    
+    users = ldap.users_get(base_dn='CN=Users,DC=ad,DC=local')
+    print('users: ',users)
     # Create a new user
-    ldap.user_create("jdoe", "John", "Doe", "OU=Users,DC=domain,DC=com")
+    ldap.user_create(username=_user,first_name=_user,last_name=_user, base_dn='CN=Users,DC=ad,DC=local')
+    
+    ldap.user_disable(_user, base_dn='CN=Users,DC=ad,DC=local')
+    ldap.user_enable(_user, base_dn='CN=Users,DC=ad,DC=local')
+
+    newPass = ldap.password_generate()
+    b = ldap.user_password(username=_user,new_password=newPass, base_dn='CN=Users,DC=ad,DC=local')
+    if b == True:
+        print('ok new password is ',newPass)
+    
+    ldap.user_delete(_user, base_dn='CN=Users,DC=ad,DC=local')
+
+    # ldap.delete_by_dn(dn=f"CN={_user} {_user},CN=Users,DC=ad,DC=local")
+    # r= ldap._get_dn(base='CN=Users,DC=ad,DC=local', filter_=f"(&(objectClass=user)(sAMAccountName={_user}))")
+    # r= ldap._search(base='CN=Users,DC=ad,DC=local', filter_=f"(&(objectClass=user)(sAMAccountName={_user}))", attrs=['distinguishedName'])
+    # print('---------------------',r)
+
 ```
 
 ### Account Management
