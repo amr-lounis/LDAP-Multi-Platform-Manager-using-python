@@ -30,7 +30,7 @@ ldap_params = {
     'ldap_address': '192.168.1.100',
     'ldap_user': 'admin@domain.com',
     'ldap_password': 'securepassword',
-    'connection_type': 'ssl',
+    'connection_type': 'ssl',#'ssl' or any
     'domain': 'domain.com',
     'server_type': 'ad'
 }
