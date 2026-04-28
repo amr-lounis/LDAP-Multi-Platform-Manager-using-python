@@ -32,7 +32,7 @@ ldap_params = {
     'ldap_password': 'securepassword',
     'connection_type': 'ssl',#'ssl' or any
     'domain': 'domain.com',
-    'server_type': 'ad'
+    'server_type': 'ad' # 'ad' or 'openldap' or 'freeipa'
 }
 
 
